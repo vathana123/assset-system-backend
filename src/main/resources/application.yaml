@@ -1,0 +1,30 @@
+spring:
+  application:
+    name: assetsystembackend
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/asset_db
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+
+    #    show-sql: true
+
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+server:
+  port: 8080
+
+security:
+  jwt:
+    issuer: assetsystembackend
+    secret: ${JWT_SECRET:YzZlODAzYjAtZjIyYy00YWZmLThmNmYtY2ExZTMwMjNkM2E2LTQwZDUzNmJmLWRlMjEtNGYxNi1hYzYxLWNiM2UyYmIwZTI2Ng==}
+    access-token-expiration-ms: ${JWT_ACCESS_TOKEN_EXPIRATION_MS:900000}      # 15 minutes
+    refresh-token-expiration-ms: ${JWT_REFRESH_TOKEN_EXPIRATION_MS:14400000}  # 4 hours
