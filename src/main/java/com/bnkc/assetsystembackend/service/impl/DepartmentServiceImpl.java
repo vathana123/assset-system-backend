@@ -57,7 +57,7 @@ public class DepartmentServiceImpl implements DepartmentService {
 
     @Override
     public DepartmentDto update(Long aLong, DepartmentDto dto) {
-        if(repository.existsByCode(dto.code())){
+        if (repository.existsByCodeAndIdNot(dto.code(), dto.id())) {
             throw new ValidationException("Code %s already exist.".formatted(dto.code()));
         }
         return mapper.toDto(repository.save(mapper.mergeDto(dto, getEntityById(aLong))));

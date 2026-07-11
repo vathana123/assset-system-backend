@@ -57,7 +57,7 @@ public class BranchServiceImpl implements BranchService {
 
     @Override
     public BranchDto update(Long aLong, BranchDto dto) {
-        if(repository.existsByCode(dto.code())){
+        if (repository.existsByCodeAndIdNot(dto.code(), dto.id())) {
             throw new ValidationException("Code %s already exist.".formatted(dto.code()));
         }
         return mapper.toDto(repository.save(mapper.mergeDto(dto, getEntityById(aLong))));

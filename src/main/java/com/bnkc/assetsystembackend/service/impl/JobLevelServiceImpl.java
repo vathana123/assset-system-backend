@@ -4,6 +4,7 @@ import com.bnkc.assetsystembackend.data.dto.JobLevelDto;
 import com.bnkc.assetsystembackend.data.respone.PageResponse;
 import com.bnkc.assetsystembackend.entity.JobLevel;
 import com.bnkc.assetsystembackend.exception.ResourceNotFoundException;
+import com.bnkc.assetsystembackend.exception.ValidationException;
 import com.bnkc.assetsystembackend.mapper.JobLevelMapper;
 import com.bnkc.assetsystembackend.repository.JobLevelRepository;
 import com.bnkc.assetsystembackend.service.JobLevelService;
@@ -48,11 +49,17 @@ public class JobLevelServiceImpl implements JobLevelService {
 
     @Override
     public JobLevelDto save(JobLevelDto dto) {
+        if(repository.existsByCode(dto.code())){
+            throw new ValidationException("Code %s already exist.".formatted(dto.code()));
+        }
         return mapper.toDto(repository.save(mapper.toEntity(dto)));
     }
 
     @Override
     public JobLevelDto update(Long aLong, JobLevelDto dto) {
+        if (repository.existsByCodeAndIdNot(dto.code(), dto.id())) {
+            throw new ValidationException("Code %s already exist.".formatted(dto.code()));
+        }
         return mapper.toDto(repository.save(mapper.mergeDto(dto, getEntityById(aLong))));
     }
 

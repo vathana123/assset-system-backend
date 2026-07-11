@@ -6,4 +6,5 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 public interface BranchRepository extends JpaRepository<Branch, Long>, JpaSpecificationExecutor<Branch> {
     boolean existsByCode(String code);
+    boolean existsByCodeAndIdNot(String code, Long id);
 }

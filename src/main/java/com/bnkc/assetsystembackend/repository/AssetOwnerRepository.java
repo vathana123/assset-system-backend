@@ -6,4 +6,5 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 public interface AssetOwnerRepository extends JpaRepository<AssetOwner, Long>, JpaSpecificationExecutor<AssetOwner> {
     boolean existsByCode(String code);
+    boolean existsByCodeAndIdNot(String code, Long id);
 }

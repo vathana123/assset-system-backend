@@ -70,13 +70,13 @@ public class AssetOwnerServiceImpl implements AssetOwnerService {
 
     @Override
     public AssetOwnerDto update(Long aLong, AssetOwnerDto dto) {
-        if (repository.existsByCode(dto.code())) {
+        if (repository.existsByCodeAndIdNot(dto.code(), aLong)) {
             throw new ValidationException("Code %s already exist.".formatted(dto.code()));
         }
         return mapper.toDto(repository.save(mapper.mergeDto(dto,
-                Entity.getById(jobPositionRepository, dto.jobPositionId(), JobPosition.class),
-                Entity.getById(branchRepository, dto.branchId(), Branch.class),
-                Entity.getById(departmentRepository, dto.departmentId(), Department.class),
+                Entity.getByIdOrNull(jobPositionRepository, dto.jobPositionId(), JobPosition.class),
+                Entity.getByIdOrNull(branchRepository, dto.branchId(), Branch.class),
+                Entity.getByIdOrNull(departmentRepository, dto.departmentId(), Department.class),
                 getEntityById(aLong)
         )));
     }

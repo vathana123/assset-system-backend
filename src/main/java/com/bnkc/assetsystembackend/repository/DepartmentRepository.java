@@ -6,4 +6,5 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 public interface DepartmentRepository extends JpaRepository<Department, Long>, JpaSpecificationExecutor<Department> {
     boolean existsByCode(String code);
+    boolean existsByCodeAndIdNot(String code, Long id);
 }
