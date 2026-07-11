@@ -13,4 +13,13 @@ public class Entity {
         return repository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException(entityClass, id));
     }
+
+    public static <T, ID> T getByIdOrNull(JpaRepository<T, ID> repository, ID id, Class<T> entityClass) {
+        if (id == null) {
+            return null;
+        }
+
+        return repository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException(entityClass, id));
+    }
 }

@@ -36,8 +36,8 @@ public class AssetOwner {
     @Column(nullable = false)
     private AssetOwnerType type;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "branch_id", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "branch_id")
     private Branch branch;
 
     @ManyToOne(fetch = FetchType.LAZY)

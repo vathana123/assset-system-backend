@@ -62,9 +62,9 @@ public class AssetOwnerServiceImpl implements AssetOwnerService {
             throw new ValidationException("Code %s already exist.".formatted(dto.code()));
         }
         return mapper.toDto(repository.save(mapper.toEntity(dto,
-                Entity.getById(jobPositionRepository, dto.jobPositionId(), JobPosition.class),
-                Entity.getById(branchRepository, dto.branchId(), Branch.class),
-                Entity.getById(departmentRepository, dto.departmentId(), Department.class)
+                Entity.getByIdOrNull(jobPositionRepository, dto.jobPositionId(), JobPosition.class),
+                Entity.getByIdOrNull(branchRepository, dto.branchId(), Branch.class),
+                Entity.getByIdOrNull(departmentRepository, dto.departmentId(), Department.class)
         )));
     }
 
