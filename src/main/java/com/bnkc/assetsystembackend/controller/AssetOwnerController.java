@@ -13,7 +13,7 @@ import java.util.Map;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("asset-owner")
+@RequestMapping("asset-owners")
 public class AssetOwnerController {
     private final AssetOwnerService service;
 
